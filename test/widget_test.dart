@@ -9,11 +9,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:na_porta/main.dart';
+import 'package:na_porta/scr/database/database_service.dart';
+import 'package:na_porta/scr/repository/order_repository.dart';
+import 'package:na_porta/scr/viewModel/order_list_view_model.dart';
 
 void main() {
+  final OrderRepository orderRepository = OrderRepository();
+  final DatabaseService databaseService = DatabaseService.instance;
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget( MyApp(orderListViewModel: OrderListViewModel(repository: orderRepository, databaseService: databaseService),));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

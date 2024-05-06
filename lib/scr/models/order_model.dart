@@ -10,8 +10,9 @@ class Order {
   String? originTime;
   String? destinationDate;
   String? destinationTime;
-
-  List<Client>? client;
+  String? clientName;
+  String? clientEmail;
+  String? clientPhone;
 
   Order({
     this.id,
@@ -22,7 +23,9 @@ class Order {
     this.originTime,
     this.destinationDate,
     this.destinationTime,
-    this.client,
+    this.clientName,
+    this.clientEmail,
+    this.clientPhone,
   });
 
   factory Order.fromJson(Map<String, dynamic> json) {
@@ -35,9 +38,9 @@ class Order {
       originTime: json['originTime'],
       destinationDate: json['destinationDate'],
       destinationTime: json['destinationTime'],
-      client: json['client'] != null
-          ? List<Client>.from(json['client'].map((x) => Client.fromJson(x)))
-          : null,
+      clientName: json['clientName'],
+      clientEmail: json['clientEmail'],
+      clientPhone: json['clientPhone'],
     );
   }
 
@@ -51,7 +54,9 @@ class Order {
       'originTime': originTime,
       'destinationDate': destinationDate,
       'destinationTime': destinationTime,
-      'client': client != null ? client!.map((x) => x.toJson()).toList() : null
+      'clientName': clientName,
+      'clientEmail': clientEmail,
+      'clientPhone': clientPhone,
     };
   }
 }
