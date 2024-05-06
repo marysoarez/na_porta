@@ -70,7 +70,7 @@ class _ListPageState extends State<ListPage> {
                     ),
                   ),
                   FutureBuilder(
-                    future: widget.viewModel?.fetchOrders(),
+                    future: widget.viewModel.fetchOrders(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(

@@ -1,4 +1,3 @@
-import 'client_model.dart';
 
 class Order {
   int? id;
