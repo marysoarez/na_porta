@@ -20,12 +20,12 @@ class DatabaseService {
     return await openDatabase(
       join(await getDatabasesPath(), 'orders_db.db'),
       onCreate: (db, version) {
-         db.execute(
+        db.execute(
           'CREATE TABLE orders(id INTEGER PRIMARY KEY, origin TEXT, destination TEXT, oNumber TEXT, originDate TEXT, originTime TEXT, destinationDate TEXT, destinationTime TEXT, client TEXT)',
         );
-         db.execute(
-           'CREATE TABLE clients(id INTEGER PRIMARY KEY, orderId INTEGER, name TEXT, email TEXT, phone TEXT)',
-         );
+        db.execute(
+          'CREATE TABLE clients(id INTEGER PRIMARY KEY, orderId INTEGER, name TEXT, email TEXT, phone TEXT)',
+        );
       },
       version: 1,
     );
@@ -42,12 +42,7 @@ class DatabaseService {
       for (Client client in order.client!) {
         await db.insert(
           'clients',
-          {
-            'orderId': order.id,
-            'name': client.name,
-            'email': client.email,
-            'phone': client.phone,
-          },
+          client.toJson(),
           conflictAlgorithm: ConflictAlgorithm.replace,
         );
       }
@@ -56,20 +51,26 @@ class DatabaseService {
 
   Future<List<Order>> getOrders() async {
     final Database db = await database;
-    final List<Map<String, dynamic>> maps = await db.query('orders');
-    return List.generate(maps.length, (i) {
-      return Order(
-        id: maps[i]['id'],
-        origin: maps[i]['origin'],
-        destination: maps[i]['destination'],
-        oNumber: maps[i]['oNumber'],
-        originDate: maps[i]['originDate'],
-        originTime: maps[i]['originTime'],
-        destinationDate: maps[i]['destinationDate'],
-        destinationTime: maps[i]['destinationTime'],
-        client: maps[i]['client'],
+    final List<Map<String, dynamic>> orderMaps = await db.query('orders');
 
+
+    final List<Order> orders = await Future.wait(orderMaps.map((orderMap) async {
+      final List<Map<String, dynamic>> clientMaps = await db.query(
+        'clients',
+        where: 'orderId = ?',
+        whereArgs: [orderMap['id']],
       );
-    });
+      final List<Client> client = clientMaps.map((clientMap) {
+        return Client(
+          id: clientMap['id'],
+          name: clientMap['name'],
+          email: clientMap['email'],
+          phone: clientMap['phone'],
+        );
+      }).toList();
+      return Order.fromJson(orderMap)..client = client;
+    }).toList());
+    return orders;
+
   }
 }

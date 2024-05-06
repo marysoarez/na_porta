@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:na_porta/scr/pages/order_detail_page.dart';
+import 'package:na_porta/scr/viewModel/order_list_view_model.dart';
 import 'package:na_porta/scr/widgets/resume.dart';
 
 class ListPage extends StatefulWidget {
-  const ListPage({super.key});
+  final OrderListViewModel viewModel;
+
+  const ListPage({
+    super.key,
+    required this.viewModel,
+  });
 
   @override
   State<ListPage> createState() => _ListPageState();
@@ -33,10 +39,6 @@ class _ListPageState extends State<ListPage> {
                     width: 58,
                     height: 60,
                   ),
-                  // Icon(
-                  //   Icons.square,size: 60,
-                  //   color: Colors.white,
-                  // ),
                   ElevatedButton(
                     onPressed: () {},
                     child: Text(
@@ -66,14 +68,53 @@ class _ListPageState extends State<ListPage> {
                       color: Color.fromRGBO(85, 85, 85, 1),
                     ),
                   ),
-                  GestureDetector(
-                    child: ResumeWidget(),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const PedidoDetailPage()),
-                      );
+                  FutureBuilder(
+                    future: widget.viewModel.fetchOrders(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else if (snapshot.hasError) {
+                        return Center(
+                          child: Text("Erro ao listar Pedidos"),
+                        );
+                      } else if (!snapshot.hasData || snapshot.data!.isEmpty){
+                        return Center(child: Text("sem pedidos"),);
+                      }
+                      else {
+                        return ListView.builder(itemBuilder: (context, index) {
+                          var order = snapshot.data![index];
+                          return GestureDetector(
+                            child: Text(order.destination.toString()),
+
+
+
+                            // ResumeWidget(
+                            // ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const PedidoDetailPage()),
+                              );
+                            },
+                          );
+                        });
+                      }
                     },
+                    // child: GestureDetector(
+                    //   child: ResumeWidget(
+                    //
+                    //   ),
+                    //   onTap: () {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(builder: (context) => const PedidoDetailPage()),
+                    //     );
+                    //   },
+                    // ),
                   ),
                   GestureDetector(
                     child: ResumeWidget(),
