@@ -7,7 +7,13 @@ class NewOrderButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return ElevatedButton( style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+      elevation: MaterialStateProperty.all<double>(0),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25.0),
+      )),
+    ),
       onPressed: () {},
       child:  Text(
         text,

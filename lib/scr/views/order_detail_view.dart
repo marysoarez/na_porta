@@ -15,7 +15,7 @@ class PedidoDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
           '${order.oNumber}',

@@ -7,8 +7,6 @@ import 'package:na_porta/scr/widgets/resume.dart';
 import 'order_detail_view.dart';
 
 class ListPage extends StatefulWidget {
-
-
   const ListPage({
     super.key,
   });
@@ -18,12 +16,10 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
+  final OrderListViewModel viewModel = Modular.get<OrderListViewModel>();
 
-   final OrderListViewModel viewModel = Modular.get<OrderListViewModel>();
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -68,7 +64,6 @@ class _ListPageState extends State<ListPage> {
                     ),
                   ),
                   FutureBuilder(
-
                     future: viewModel.fetchOrders(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
@@ -101,8 +96,10 @@ class _ListPageState extends State<ListPage> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                             PedidoDetailPage(order: order,)),
+                                      builder: (context) => PedidoDetailPage(
+                                        order: order,
+                                      ),
+                                    ),
                                   );
                                 },
                               );

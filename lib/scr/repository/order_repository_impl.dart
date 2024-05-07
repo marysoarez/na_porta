@@ -15,7 +15,7 @@ class OrderRepositoryImpl implements OrderRepository {
   Future<List<Order>> fetchOrderFromAPI() async {
     final response = await http.get(
         Uri.parse(
-            "https://6db02341-e024-4d8e-b3e5-f883c7f6aeae.mock.pstmn.io/orders"),
+            "https://fb472438-131d-43e7-945d-e6231af5239a.mock.pstmn.io/api"),
         headers: {'Content-Type': 'application/json'});
     if (response.statusCode == 200) {
       final List<dynamic> jsonList = json.decode(response.body);
