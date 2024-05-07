@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ClienteInfoWidget extends StatefulWidget {
-  const ClienteInfoWidget({super.key});
+
+  final String name;
+  final String email;
+  final String phone;
+
+  const ClienteInfoWidget({super.key, required this.name, required this.email, required this.phone});
 
   @override
   State<ClienteInfoWidget> createState() => _ClienteInfoWidgetState();
@@ -10,7 +15,7 @@ class ClienteInfoWidget extends StatefulWidget {
 class _ClienteInfoWidgetState extends State<ClienteInfoWidget> {
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return  Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -23,7 +28,7 @@ class _ClienteInfoWidgetState extends State<ClienteInfoWidget> {
           ),
         ),
         Text(
-          "Jon Doe",
+          widget.name,
           style: TextStyle(
             color: Color.fromRGBO(85, 85, 85, 1),
             fontWeight: FontWeight.w400,
@@ -31,7 +36,7 @@ class _ClienteInfoWidgetState extends State<ClienteInfoWidget> {
           ),
         ),
         Text(
-          "john.doe@teste.com",
+          widget.email,
           style: TextStyle(
             color: Color.fromRGBO(85, 85, 85, 1),
             fontWeight: FontWeight.w400,
@@ -39,7 +44,7 @@ class _ClienteInfoWidgetState extends State<ClienteInfoWidget> {
           ),
         ),
         Text(
-          "+55 11 99000-0023",
+          widget.phone,
           style: TextStyle(
             color: Color.fromRGBO(85, 85, 85, 1),
             fontWeight: FontWeight.w400,

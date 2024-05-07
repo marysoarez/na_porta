@@ -38,10 +38,9 @@ class PedidoDetailPage extends StatelessWidget {
           ),
 
           //mapa
-           MapWidget(
+          MapWidget(
             destination: '${order.destination}',
             origin: '${order.origin}',
-
           ),
 
           //informações
@@ -59,7 +58,7 @@ class PedidoDetailPage extends StatelessWidget {
                   height: 50,
                 ),
                 DestinoWidget(
-                  destination:'${order.destination}' ,
+                  destination: '${order.destination}',
                   destinationDate: '${order.destinationDate}',
                   destinationTime: '${order.destinationTime}',
                 ),
@@ -71,7 +70,11 @@ class PedidoDetailPage extends StatelessWidget {
                     children: [
                       InfoPedidoWidget(),
                       SizedBox(height: 20),
-                      ClienteInfoWidget(),
+                      ClienteInfoWidget(
+                        email: '${order.clientEmail}',
+                        name: '${order.clientName}',
+                        phone: '${order.clientPhone}',
+                      ),
                     ],
                   ),
                 ),
