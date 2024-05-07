@@ -3,13 +3,21 @@ import 'package:na_porta/scr/database/database_service.dart';
 import 'package:na_porta/scr/models/map_model.dart';
 
 class MapViewModel with ChangeNotifier {
+ final DatabaseService _databaseService = DatabaseService.instance;
 
-  final MapModel _model = MapModel();
+ late MapModel origin;
+ late MapModel destination;
 
+ MapViewModel() {
+   _init();
 
-  void addMarker(){}
-  @override
-  void notifyListeners() {
-    super.notifyListeners();
-  }
+ }
+
+ Future<void> _init()async{
+   await _databaseService.database;
+   origin = (await _databaseService.getOrders()) as MapModel;
+
+   notifyListeners();
+ }
+
 }

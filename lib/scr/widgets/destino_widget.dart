@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class DestinoWidget extends StatefulWidget {
-  const DestinoWidget({super.key});
+class DestinoWidget extends StatelessWidget {
+  final String destination;
+  final String destinationDate;
+  final String destinationTime;
 
-  @override
-  State<DestinoWidget> createState() => _DestinoWidgetState();
-}
 
-class _DestinoWidgetState extends State<DestinoWidget> {
+  const DestinoWidget({super.key, required this.destination, required this.destinationDate, required this.destinationTime});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,18 +35,18 @@ class _DestinoWidgetState extends State<DestinoWidget> {
             const SizedBox(
               width: 10,
             ),
-            const Column(
+             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Chegando em Avenida Paulista, 807 - Bela Vista",
+                Text("Chegando em ${destination}",
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 14,
                       color: Color.fromRGBO(85, 85, 85, 1),
                     )),
                 Text(
-                  "17/02/2023 às 13:30",
+                  "${destinationDate} às ${destinationTime}",
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 14,

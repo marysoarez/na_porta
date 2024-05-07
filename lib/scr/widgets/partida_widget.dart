@@ -1,61 +1,58 @@
 import 'package:flutter/material.dart';
 
-class PartidaWidget extends StatefulWidget {
-  const PartidaWidget({super.key});
+class PartidaWidget extends StatelessWidget {
+  final String origin;
+  final String originDate;
+  final String originTime;
 
-  @override
-  State<PartidaWidget> createState() => _PartidaWidgetState();
-}
 
-class _PartidaWidgetState extends State<PartidaWidget> {
+  const PartidaWidget({super.key, required this.origin, required this.originDate, required this.originTime,});
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // decoration: BoxDecoration(color: Colors.blue),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  6,
-                ),
-                color: const Color.fromRGBO(246, 152, 74, 1),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(
+                6,
               ),
-              height: 46,
-              width: 46,
-              child: const Icon(
-                Icons.car_rental,
-                size: 22,
-                color: Color.fromRGBO(225, 225, 225, 1),
-              ),
+              color: const Color.fromRGBO(246, 152, 74, 1),
             ),
-            const SizedBox(
-              width: 10,
+            height: 46,
+            width: 46,
+            child: const Icon(
+              Icons.car_rental,
+              size: 22,
+              color: Color.fromRGBO(225, 225, 225, 1),
             ),
-            const Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Saindo de Avenida Paulista, 807 - Bela Vista",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14,
-                      color: Color.fromRGBO(85, 85, 85, 1),
-                    )),
-                Text(
-                  "17/02/2023 às 13:30",
-                  style: TextStyle(fontWeight: FontWeight.w400,
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+           Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Saindo de $origin',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
                     fontSize: 14,
                     color: Color.fromRGBO(85, 85, 85, 1),
-                  ),
+                  )),
+              Text(
+                "$originDate às $originTime",
+                style: TextStyle(fontWeight: FontWeight.w400,
+                  fontSize: 14,
+                  color: Color.fromRGBO(85, 85, 85, 1),
                 ),
-              ],
-            )
-          ],
-        ),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }

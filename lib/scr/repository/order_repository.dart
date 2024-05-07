@@ -7,7 +7,7 @@ class OrderRepository {
   Future<List<Order>> fetchOrderFromAPI() async {
     final response = await http.get(
         Uri.parse(
-            "https://12983890-bc94-406d-94c9-aa573207d0c9.mock.pstmn.io/teste"),
+            "https://6db02341-e024-4d8e-b3e5-f883c7f6aeae.mock.pstmn.io/orders"),
         headers: {'Content-Type': 'application/json'});
     if (response.statusCode == 200) {
 

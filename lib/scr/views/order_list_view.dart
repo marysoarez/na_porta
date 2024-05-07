@@ -80,7 +80,7 @@ class _ListPageState extends State<ListPage> {
                         );
                       } else {
                         return Container(
-                          height: 400,
+                          height: 600,
                           child: ListView.builder(
                             itemBuilder: (context, index) {
                               var order = snapshot.data![index];
@@ -97,7 +97,7 @@ class _ListPageState extends State<ListPage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const PedidoDetailPage()),
+                                             PedidoDetailPage(order: order,)),
                                   );
                                 },
                               );

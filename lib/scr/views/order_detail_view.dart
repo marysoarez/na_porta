@@ -5,25 +5,20 @@ import 'package:na_porta/scr/widgets/info_order_widget.dart';
 import 'package:na_porta/scr/widgets/map/map_widget.dart';
 import 'package:na_porta/scr/widgets/partida_widget.dart';
 
-class PedidoDetailPage extends StatefulWidget {
+import '../models/order_model.dart';
 
+class PedidoDetailPage extends StatelessWidget {
+  final Order order;
 
+  const PedidoDetailPage({super.key, required this.order});
 
-  const PedidoDetailPage({super.key});
-
-  @override
-  State<PedidoDetailPage> createState() => _PedidoDetailPageState();
-}
-
-class _PedidoDetailPageState extends State<PedidoDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( iconTheme: const IconThemeData(
-          color: Colors.white
-      ),
-        title: const Text(
-          "Pedido C3C8CE",
+      appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: Text(
+          '${order.oNumber}',
           style: TextStyle(
               color: Color.fromRGBO(255, 255, 255, 1),
               fontSize: 20,
@@ -34,7 +29,6 @@ class _PedidoDetailPageState extends State<PedidoDetailPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           //espaçamento do header
           Container(
             height: 40,
@@ -43,21 +37,32 @@ class _PedidoDetailPageState extends State<PedidoDetailPage> {
             ),
           ),
 
-
           //mapa
-          const MapWidget(),
+           MapWidget(
+            destination: '${order.destination}',
+            origin: '${order.origin}',
+
+          ),
 
           //informações
           Container(
             padding: const EdgeInsets.all(10),
-            child: (const Column(
+            child: (Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                PartidaWidget(),
+                PartidaWidget(
+                  origin: '${order.origin}',
+                  originTime: '${order.originTime}',
+                  originDate: '${order.originDate}',
+                ),
                 SizedBox(
                   height: 50,
                 ),
-                DestinoWidget(),
+                DestinoWidget(
+                  destination:'${order.destination}' ,
+                  destinationDate: '${order.destinationDate}',
+                  destinationTime: '${order.destinationTime}',
+                ),
                 SizedBox(height: 20),
                 Padding(
                   padding: EdgeInsets.all(20.0),

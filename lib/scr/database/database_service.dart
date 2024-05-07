@@ -36,11 +36,31 @@ class DatabaseService {
     );
   }
 
-
   Future<List<Order>> getOrders() async {
     final Database db = await database;
     final List<Map<String, dynamic>> orderMaps = await db.query('orders');
     return orderMaps.map((orderMap) => Order.fromJson(orderMap)).toList();
   }
-}
 
+  Future<Order> getOrigin() async {
+    final Database db = await database;
+    final List<Map<String, dynamic>> result = await db.query(
+      'orders',
+      columns: ['origin'],
+      orderBy: 'id DESC',
+      limit: 1,
+    );
+    return Order.fromJson(result.first);
+  }
+
+  Future<Order> getDestination() async {
+    final Database db = await database;
+    final List<Map<String, dynamic>> result = await db.query(
+      'orders',
+      columns: ['destination'],
+      orderBy: 'id DESC',
+      limit: 1,
+    );
+    return Order.fromJson(result.first);
+  }
+}
