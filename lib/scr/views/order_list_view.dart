@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:na_porta/scr/viewModel/order_list_view_model.dart';
+import 'package:na_porta/scr/widgets/new_order_button.dart';
 import 'package:na_porta/scr/widgets/resume.dart';
 
 import 'order_detail_view.dart';
@@ -40,14 +41,7 @@ class _ListPageState extends State<ListPage> {
                     width: 58,
                     height: 60,
                   ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "Novo Pedido",
-                      style: TextStyle(
-                          fontSize: 16, color: Color.fromRGBO(85, 85, 85, 1)),
-                    ),
-                  ),
+                  NewOrderButton(onPressed: () {}, text: "Novo Pedido")
                 ],
               ),
             ),

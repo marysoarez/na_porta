@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:na_porta/scr/widgets/client_info_widget.dart';
 import 'package:na_porta/scr/widgets/destino_widget.dart';
 import 'package:na_porta/scr/widgets/info_order_widget.dart';
+import 'package:na_porta/scr/widgets/map/map_widget.dart';
 import 'package:na_porta/scr/widgets/partida_widget.dart';
 
 class PedidoDetailPage extends StatefulWidget {
@@ -44,11 +45,7 @@ class _PedidoDetailPageState extends State<PedidoDetailPage> {
 
 
           //mapa
-          Container(
-
-            height: 230,
-            color: Colors.red,
-          ),
+          const MapWidget(),
 
           //informações
           Container(

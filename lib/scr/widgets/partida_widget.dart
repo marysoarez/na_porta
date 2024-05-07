@@ -22,20 +22,20 @@ class _PartidaWidgetState extends State<PartidaWidget> {
                 borderRadius: BorderRadius.circular(
                   6,
                 ),
-                color: Color.fromRGBO(246, 152, 74, 1),
+                color: const Color.fromRGBO(246, 152, 74, 1),
               ),
               height: 46,
               width: 46,
-              child: Icon(
+              child: const Icon(
                 Icons.car_rental,
                 size: 22,
                 color: Color.fromRGBO(225, 225, 225, 1),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
-            Column(
+            const Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

@@ -10,7 +10,7 @@ class InfoPedidoWidget extends StatefulWidget {
 class _InfoPedidoWidgetState extends State<InfoPedidoWidget> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(

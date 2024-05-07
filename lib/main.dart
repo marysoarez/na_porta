@@ -3,6 +3,7 @@ import 'package:na_porta/scr/database/database_service.dart';
 import 'package:na_porta/scr/repository/order_repository.dart';
 import 'package:na_porta/scr/viewModel/order_list_view_model.dart';
 import 'package:na_porta/scr/views/order_list_view.dart';
+import 'package:na_porta/scr/widgets/map/map_widget.dart';
 
 void main() {
 
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: ListPage(viewModel: orderListViewModel),
+      // home: MapWidget(),
     );
   }
 }
