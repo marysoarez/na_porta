@@ -68,7 +68,7 @@ class PedidoDetailPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      InfoPedidoWidget(),
+                      InfoPedidoWidget(oNumber: '${order.oNumber}'),
                       SizedBox(height: 20),
                       ClienteInfoWidget(
                         email: '${order.clientEmail}',

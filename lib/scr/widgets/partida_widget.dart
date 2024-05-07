@@ -5,8 +5,12 @@ class PartidaWidget extends StatelessWidget {
   final String originDate;
   final String originTime;
 
-
-  const PartidaWidget({super.key, required this.origin, required this.originDate, required this.originTime,});
+  const PartidaWidget({
+    super.key,
+    required this.origin,
+    required this.originDate,
+    required this.originTime,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,24 +37,30 @@ class PartidaWidget extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-           Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Saindo de $origin',
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Saindo de $origin',
+                  maxLines: 3,
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 14,
                     color: Color.fromRGBO(85, 85, 85, 1),
-                  )),
-              Text(
-                "$originDate às $originTime",
-                style: TextStyle(fontWeight: FontWeight.w400,
-                  fontSize: 14,
-                  color: Color.fromRGBO(85, 85, 85, 1),
+                  ),
                 ),
-              ),
-            ],
+                Text(
+                  "$originDate às $originTime",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                    color: Color.fromRGBO(85, 85, 85, 1),
+                  ),
+                ),
+              ],
+            ),
           )
         ],
       ),

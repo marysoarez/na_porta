@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class InfoPedidoWidget extends StatefulWidget {
-  const InfoPedidoWidget({super.key});
+  final String oNumber;
+  const InfoPedidoWidget({super.key, required this.oNumber});
 
   @override
   State<InfoPedidoWidget> createState() => _InfoPedidoWidgetState();
@@ -10,7 +11,7 @@ class InfoPedidoWidget extends StatefulWidget {
 class _InfoPedidoWidgetState extends State<InfoPedidoWidget> {
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return  Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -20,7 +21,7 @@ class _InfoPedidoWidgetState extends State<InfoPedidoWidget> {
               fontSize: 14),
         ),
         Text(
-          "C8C3CE",
+          widget.oNumber,
           style: TextStyle(
               color: Color.fromRGBO(85, 85, 85, 1),
               fontSize: 32,

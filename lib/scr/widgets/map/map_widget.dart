@@ -6,6 +6,7 @@ import 'package:geocoding/geocoding.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:na_porta/scr/repository/map_repository.dart';
+
 class MapWidget extends StatefulWidget {
   final String origin;
   final String destination;
@@ -21,8 +22,10 @@ class MapWidget extends StatefulWidget {
 }
 
 class _MapWidgetState extends State<MapWidget> {
-  LatLng? originLoc;
-  LatLng? destinationLoc;
+    LatLng? originLoc;
+    LatLng? destinationLoc;
+
+
 
   Future<LatLng> getCoordinates(String address) async {
     try {
@@ -30,7 +33,8 @@ class _MapWidgetState extends State<MapWidget> {
       if (locations.isNotEmpty) {
         return LatLng(locations.first.latitude, locations.first.longitude);
       } else {
-        throw Exception("Nenhuma coordenada encontrada para o endereço fornecido.");
+        throw Exception(
+            "Nenhuma coordenada encontrada para o endereço fornecido.");
       }
     } catch (e) {
       print("Erro ao obter coordenadas: $e");
@@ -44,8 +48,10 @@ class _MapWidgetState extends State<MapWidget> {
     originLoc = await getCoordinates(origin);
     destinationLoc = await getCoordinates(destination);
 
-    print("Coordenadas de Origem: ${originLoc!.latitude}, ${originLoc!.longitude}");
-    print("Coordenadas de Destino: ${destinationLoc!.latitude}, ${destinationLoc!.longitude}");
+    print(
+        "Coordenadas de Origem: ${originLoc!.latitude}, ${originLoc!.longitude}");
+    print(
+        "Coordenadas de Destino: ${destinationLoc!.latitude}, ${destinationLoc!.longitude}");
 
     getPolyPoints(originLoc!, destinationLoc!);
   }
@@ -62,7 +68,7 @@ class _MapWidgetState extends State<MapWidget> {
     );
     if (result.points.isNotEmpty) {
       result.points.forEach(
-            (PointLatLng point) =>
+        (PointLatLng point) =>
             polylineCoordinates.add(LatLng(point.latitude, point.longitude)),
       );
       setState(() {});
@@ -79,10 +85,13 @@ class _MapWidgetState extends State<MapWidget> {
   Widget build(BuildContext context) {
     return Container(
       height: 230,
-      child: GoogleMap(
+      child: originLoc == null || destinationLoc == null
+          ? Center(child: CircularProgressIndicator()) // Placeholder for loading state
+          : GoogleMap(
         initialCameraPosition: CameraPosition(
-          target: originLoc ?? LatLng( -22.837419, -43.36513), // arrumar isso aqui
-          zoom: 12,
+          target: originLoc!,
+          zoom: 14,
+
         ),
         polylines: {
           if (polylineCoordinates.isNotEmpty)
@@ -94,16 +103,14 @@ class _MapWidgetState extends State<MapWidget> {
             ),
         },
         markers: {
-          if (originLoc != null)
-            Marker(
-              markerId: MarkerId("Origem"),
-              position: originLoc!,
-            ),
-          if (destinationLoc != null)
-            Marker(
-              markerId: MarkerId("Destino"),
-              position: destinationLoc!,
-            ),
+          Marker(
+            markerId: MarkerId("Origem"),
+            position: originLoc!,
+          ),
+          Marker(
+            markerId: MarkerId("Destino"),
+            position: destinationLoc!,
+          ),
         },
       ),
     );

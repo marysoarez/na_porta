@@ -1,8 +1,8 @@
 
 class Order {
   int? id;
-  String? origin;
-  String? destination;
+  String origin;
+  String destination;
   String? oNumber;
 
   String? originDate;
@@ -15,8 +15,8 @@ class Order {
 
   Order({
     this.id,
-    this.origin,
-    this.destination,
+    required this.origin,
+    required this.destination,
     this.oNumber,
     this.originDate,
     this.originTime,
