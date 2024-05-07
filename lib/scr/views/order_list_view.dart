@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:na_porta/scr/viewModel/order_list_view_model.dart';
 import 'package:na_porta/scr/widgets/new_order_button.dart';
 import 'package:na_porta/scr/widgets/resume.dart';
@@ -6,11 +7,10 @@ import 'package:na_porta/scr/widgets/resume.dart';
 import 'order_detail_view.dart';
 
 class ListPage extends StatefulWidget {
-  final OrderListViewModel viewModel;
+
 
   const ListPage({
     super.key,
-    required this.viewModel,
   });
 
   @override
@@ -18,8 +18,12 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
+
+   final OrderListViewModel viewModel = Modular.get<OrderListViewModel>();
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -64,7 +68,8 @@ class _ListPageState extends State<ListPage> {
                     ),
                   ),
                   FutureBuilder(
-                    future: widget.viewModel.fetchOrders(),
+
+                    future: viewModel.fetchOrders(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(

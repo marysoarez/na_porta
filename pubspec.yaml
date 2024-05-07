@@ -37,6 +37,8 @@ dependencies:
   geocoding: ^2.0.1
   flutter_polyline_points: ^2.0.0
   geocode: ^1.0.3
+  provider: ^6.1.2
+  flutter_modular: ^6.3.3
 #  location: ^5.0.3
 
 

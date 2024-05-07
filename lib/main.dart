@@ -1,39 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:na_porta/scr/database/database_service.dart';
-import 'package:na_porta/scr/repository/order_repository.dart';
-import 'package:na_porta/scr/viewModel/order_list_view_model.dart';
-import 'package:na_porta/scr/views/order_list_view.dart';
-import 'package:na_porta/scr/widgets/map/map_widget.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:na_porta/module/app_module.dart';
+import 'package:na_porta/module/app_widget.dart';
+import 'package:na_porta/scr/database/database_service_impl.dart';
 
-void main() {
-
-  final OrderRepository orderRepository = OrderRepository();
-  final DatabaseService databaseService = DatabaseService.instance;
-  final OrderListViewModel orderListViewModel = OrderListViewModel(
-      repository: orderRepository, databaseService: databaseService);
+void main() async{
 
 
-  runApp( MyApp(orderListViewModel: orderListViewModel));
-}
+  WidgetsFlutterBinding
+      .ensureInitialized();
+  await DatabaseServiceImpl.instance.database;
+  runApp(
 
-class MyApp extends StatelessWidget {
-  final OrderListViewModel orderListViewModel;
+    ModularApp(module: AppModule(), child: AppWidget()
+      ));
 
-  const MyApp({super.key,  required this.orderListViewModel});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-        ),
-        useMaterial3: true,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: ListPage(viewModel: orderListViewModel),
-      // home: MapWidget(),
-    );
-  }
 }

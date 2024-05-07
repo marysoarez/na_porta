@@ -29,7 +29,6 @@ class PedidoDetailPage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          //espaçamento do header
           Container(
             height: 40,
             decoration: const BoxDecoration(
@@ -37,13 +36,13 @@ class PedidoDetailPage extends StatelessWidget {
             ),
           ),
 
-          //mapa
+
           MapWidget(
             destination: '${order.destination}',
             origin: '${order.origin}',
           ),
 
-          //informações
+
           Container(
             padding: const EdgeInsets.all(10),
             child: (Column(

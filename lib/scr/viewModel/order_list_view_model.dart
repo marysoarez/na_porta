@@ -1,28 +1,28 @@
-import 'package:na_porta/scr/database/database_service.dart';
 import 'package:na_porta/scr/models/order_model.dart';
-import 'package:na_porta/scr/repository/order_repository.dart';
 
-class OrderListViewModel{
+import '../repository/order_repository.dart';
+
+class OrderListViewModel {
   final OrderRepository repository;
-  final DatabaseService databaseService;
 
-  OrderListViewModel({required this.repository, required this.databaseService});
+  OrderListViewModel({
+    required this.repository,
+  });
 
-  Future<List<Order>> fetchOrders()async{
-    try{
-      List<Order> orders = await databaseService.getOrders();
+  Future<List<Order>> fetchOrders() async {
+    try {
+      List<Order> orders = await repository.getOrders();
 
-      if(orders.isEmpty) {
+      if (orders.isEmpty) {
         orders = await repository.fetchOrderFromAPI();
 
-        for(Order order in orders) {
-          await databaseService.insertOrder(order);
+        for (Order order in orders) {
+          await repository.insertOrder(order);
         }
       }
       return orders;
-    }catch(e){
+    } catch (e) {
       throw Exception("Erro ao retornar Pedidos $e");
     }
   }
-
 }
